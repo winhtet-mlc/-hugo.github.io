@@ -48,8 +48,9 @@ jobs:
             - public
 
   run:
+    working_directory: ~/hugo.github.io/public
     docker:
-      - image: cibuilds/hugo:latest
+      - image: circleci/python:3.7.6
     steps:
       - checkout
       - run:
