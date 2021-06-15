@@ -8,12 +8,9 @@ workflows:
       - build:
           requires:
             - convert
-      - run:
-          requires:
-            - build
       - deploy:
           requires:
-            - run
+            - build
 
 jobs:
   convert:
@@ -42,19 +39,11 @@ jobs:
       - run:
           command: |
             hugo
+            hugo server -D
       - persist_to_workspace:
           root: .
           paths:
             - public
-
-  run:
-    docker:
-      - image: circleci/python:3.7.6
-    steps:
-      - checkout
-      - run:
-          command: |
-              hugo server -D
 
   deploy:
     machine: true
