@@ -56,12 +56,12 @@ jobs:
            command: |
              git config --global user.name ${GIT_USER_NAME}
              git config --global user.email ${GIT_USER_EMAIL}
-             git clone https://github.com/winhtet-mlc/circlecitest.git
+             git clone https://github.com/winhtet-mlc/-hugo.github.io.git
              ls
-             cp -rp public/* circlecitest/
-             cd circlecitest
+             cp -rp public/* -hugo.github.io/
+             cd -hugo.github.io
              ls
-             git remotr set-url origin git@github.com:winhtet-mlc/circlecitest.git
+             git remote set-url origin git@github.com:winhtet-mlc/-hugo.github.io.git
              git add .
              git commit -m "Automated Deploy"
              git push origin master
