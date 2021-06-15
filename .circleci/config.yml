@@ -45,9 +45,9 @@ jobs:
             - public
 
   deploy:
+    machine: true
     docker:
       - image: cibuilds/hugo:latest
-    machine: true
     steps:
       - add_ssh_keys:
           fingerprints:
