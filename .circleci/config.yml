@@ -45,7 +45,6 @@ jobs:
             - public
 
   deploy:
-    machine: true
     docker:
       - image: cibuilds/hugo:latest
     steps:
