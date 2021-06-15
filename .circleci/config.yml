@@ -8,10 +8,12 @@ workflows:
       - build:
           requires:
             - convert
-      - run
-      - deploy:
+      - run:
           requires:
             - build
+      - deploy:
+          requires:
+            - run
 
 jobs:
   convert:
