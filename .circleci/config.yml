@@ -48,17 +48,13 @@ jobs:
             - public
 
   run:
-    working_directory: ~/hugo.github.io/public
     docker:
       - image: circleci/python:3.7.6
-      - image: docker:17.05.0-ce-git
     steps:
       - checkout
       - run:
           command: |
-              docker ps
-              cd public/
-              python -m http.server 8000
+              hugo server -D
 
   deploy:
     machine: true
