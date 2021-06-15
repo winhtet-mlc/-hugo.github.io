@@ -57,6 +57,7 @@ jobs:
       - run:
            name: Deploy
            command: |
+             git pull origin development
              git config --global user.name ${GIT_USER_NAME}
              git config --global user.email ${GIT_USER_EMAIL}
              git clone https://github.com/winhtet-mlc/hugo.github.io.git
@@ -68,7 +69,6 @@ jobs:
              git add .
              git commit -m "Automated Deploy"
              git push origin HEAD:main
-
 
   run:
     working_directory: ~/hugo.github.io/public
