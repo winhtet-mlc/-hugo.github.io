@@ -51,13 +51,16 @@ jobs:
     working_directory: ~/hugo.github.io/public
     docker:
       - image: circleci/python:3.7.6
-      - image: docker:17.05.0-ce-git
     steps:
       - checkout
       - run:
           command: |
               cd public/
               python -m http.server 8000
+      - store_test_results:
+          path: test-reports
+      - store_artifacts:
+          path: test-reports
 
   deploy:
     machine: true
