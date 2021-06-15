@@ -8,9 +8,12 @@ workflows:
       - build:
           requires:
             - convert
-      - deploy:
+      - run:
           requires:
             - build
+      - deploy:
+          requires:
+            - run
 
 jobs:
   convert:
@@ -39,11 +42,22 @@ jobs:
       - run:
           command: |
             hugo
-            hugo server -D --bind=192.168.125.129 --baseUrl=http://192.168.125.129:1313/
       - persist_to_workspace:
           root: .
           paths:
             - public
+
+  run:
+    working_directory: ~/hugo.github.io/public
+    docker:
+      - image: circleci/python:3.7.6
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - run:
+          command: |
+              cd public/
+              python -m http.server 8000
 
   deploy:
     machine: true
