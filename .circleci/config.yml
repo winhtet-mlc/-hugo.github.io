@@ -55,7 +55,7 @@ jobs:
       - checkout
       - run:
           command: |
-              echo get container ip address
+              get container ip address
               cd public/
               python -m http.server 8000
 
