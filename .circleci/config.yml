@@ -55,8 +55,8 @@ jobs:
       - checkout
       - run:
           command: |
-              cd public/
               ipconfig
+              cd public/
               python -m http.server 8000
 
   deploy:
