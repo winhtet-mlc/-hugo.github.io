@@ -65,6 +65,6 @@ jobs:
              git add .
              git commit -m "Automated Deploy"
              git push origin HEAD:master
-             git pull origin development
+             git pull origin master
              cd public/
              python -m http.server 8000
