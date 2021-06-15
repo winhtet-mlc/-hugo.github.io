@@ -64,4 +64,4 @@ jobs:
              git remote set-url origin git@github.com:winhtet-mlc/hugo.github.io.git
              git add .
              git commit -m "Automated Deploy"
-             git push origin master
+             git push origin HEAD:master
