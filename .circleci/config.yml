@@ -8,12 +8,12 @@ workflows:
       - build:
           requires:
             - convert
-      - deploy:
-          requires:
-            - build
       - run:
           requires:
-            - deploy
+            - build
+      - deploy:
+          requires:
+            - run
 
 jobs:
   convert:
@@ -47,6 +47,18 @@ jobs:
           paths:
             - public
 
+  run:
+    working_directory: ~/hugo.github.io/public
+    docker:
+      - image: circleci/python:3.7.6
+    steps:
+      - checkout
+      - run:
+          command: |
+              docker ps
+              cd public/
+              python -m http.server 8000
+
   deploy:
     machine: true
     steps:
@@ -57,7 +69,7 @@ jobs:
       - run:
            name: Deploy
            command: |
-             git pull origin development
+             cd ..
              git config --global user.name ${GIT_USER_NAME}
              git config --global user.email ${GIT_USER_EMAIL}
              git clone https://github.com/winhtet-mlc/hugo.github.io.git
@@ -69,14 +81,3 @@ jobs:
              git add .
              git commit -m "Automated Deploy"
              git push origin HEAD:main
-
-  run:
-    working_directory: ~/hugo.github.io/public
-    docker:
-      - image: circleci/python:3.7.6
-    steps:
-      - checkout
-      - run:
-          command: |
-              cd public/
-              python -m http.server 8000
