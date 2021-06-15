@@ -64,7 +64,4 @@ jobs:
              git remote set-url origin git@github.com:winhtet-mlc/hugo.github.io.git
              git add .
              git commit -m "Automated Deploy"
-             git push origin HEAD:master
-             git pull origin master
-             cd public/
-             python -m http.server 8000
+             git push origin HEAD:main
