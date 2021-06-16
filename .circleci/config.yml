@@ -39,7 +39,6 @@ jobs:
     docker:
       - image: cibuilds/hugo:latest
     steps:
-      - checkout
       - run:
           command: |
             hugo
