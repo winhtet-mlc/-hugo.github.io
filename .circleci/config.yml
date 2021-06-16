@@ -35,21 +35,13 @@ jobs:
           paths:
             - content
   build:
-    working_directory: /tmp
     docker:
       - image: cibuilds/hugo:latest
     steps:
+      - checkout
       - run:
           command: |
             hugo
-            echo "my artifact file" > /tmp/artifact-1;
-            mkdir /tmp/artifacts;
-            echo "my artifact files in a dir" > /tmp/artifacts/artifact-2;
-      - store_artifacts:
-          path: /tmp/artifact-1
-          destination: artifact-file
-      - store_artifacts:
-          path: /tmp/artifacts
       - persist_to_workspace:
           root: .
           paths:
@@ -64,9 +56,11 @@ jobs:
       - run:
           command: |
               cd public/
-              python -m http.server 8000
+              python -m http.server 8000 192.168.125.129
+      - store_test_results:
+          path: test-reports
       - store_artifacts:
-          path: public/test-artifacts
+          path: test-reports
 
   deploy:
     machine: true
