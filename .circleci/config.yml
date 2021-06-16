@@ -57,10 +57,8 @@ jobs:
           command: |
               cd public/
               python -m http.server 8000
-      - store_test_results:
-          path: test-reports
       - store_artifacts:
-          path: test-reports
+          path: public/test-reports
 
   deploy:
     machine: true
